@@ -1,40 +1,41 @@
-var h = function(tagName, properties, children) {
-  var element = document.createElement(tagName);
+window.glue = {
+  h: function(tagName, properties, children) {
+    var element = document.createElement(tagName);
 
-  Object.keys(properties).forEach(function(property) {
-    element[property] = properties[property];
-  });
-
-  if (Array.isArray(children)) {
-    children.forEach(function(child) {
-      element.appendChild(child);
+    Object.keys(properties).forEach(function(property) {
+      element[property] = properties[property];
     });
-  } else if (typeof children === 'string') {
-    element.appendChild(document.createTextNode(children));
-  }
 
-  return element;
-};
+    if (Array.isArray(children)) {
+      children.forEach(function(child) {
+        element.appendChild(child);
+      });
+    } else if (typeof children === 'string') {
+      element.appendChild(document.createTextNode(children));
+    }
 
-var mergeState = function(oldState, newState) {
-  return Object.assign({}, oldState, newState);
-};
+    return element;
+  },
+  setState: function(key, value) {
+    var self = this;
 
-var updateNodes = function(oldNodes, newNodes) {
-  oldNodes.replaceWith(newNodes);
+    var mergeState = function(oldState, newState) {
+      return Object.assign({}, oldState, newState);
+    };
 
-  return newNodes;
-};
+    var updateNodes = function(oldNodes, newNodes) {
+      oldNodes.replaceWith(newNodes);
 
-var setState = function(key, value) {
-  var self = this;
+      return newNodes;
+    };
 
-  return function(event) {
-    var newState = {};
+    return function(event) {
+      var newState = {};
 
-    newState[key] = value;
+      newState[key] = value;
 
-    self.state = mergeState(self.state, newState);
-    self.nodes = updateNodes(self.nodes, self.render());
+      self.state = mergeState(self.state, newState);
+      self.nodes = updateNodes(self.nodes, self.render());
+    };
   }
 };
