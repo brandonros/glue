@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Glue - hyperapp inspired Javascript framework composed of nothing but state and rendering</title>
+  </head>
+
+  <body>
+    <script type="text/javascript" src="glue.js"></script>
+
+    <script type="text/javascript">
+      var component1 = {
+        state: {
+          counter: 0
+        },
+        render: function() {
+          var self = this;
+
+          self.nodes = h('div', {}, [
+            h('span', {}, `Component #1 value: ${self.state.counter}`),
+            h('button', {onclick: setState.call(self, 'counter', self.state.counter + 1)}, '+'),
+            h('button', {onclick: setState.call(self, 'counter', self.state.counter - 1)}, '-')
+          ]);
+
+          return self.nodes;
+        }
+      };
+
+      var component2 = {
+        state: {
+          counter: 0
+        },
+        render: function() {
+          var self = this;
+
+          self.nodes = h('div', {}, [
+            h('span', {}, `Component #2 value: ${self.state.counter}`),
+            h('button', {onclick: setState.call(self, 'counter', self.state.counter + 1)}, '+'),
+            h('button', {onclick: setState.call(self, 'counter', self.state.counter - 1)}, '-')
+          ]);
+
+          return self.nodes;
+        }
+      };
+
+      var app = {
+        state: {},
+        render: function() {
+          var self = this;
+
+          self.nodes = h('div', {}, [
+            component1.render(),
+            component2.render()
+          ]);
+
+          return self.nodes;
+        }
+      };
+
+      document.body.appendChild(app.render());
+    </script>
+  </body>
+</html>
