@@ -20,6 +20,7 @@ var component1 = {
     ]);
   }
 };
+
 var component2 = {
   state: {
     counter: 0
@@ -33,6 +34,7 @@ var component2 = {
     ]);
   }
 };
+
 var app = {
   state: {},
   render: function() {
@@ -43,5 +45,6 @@ var app = {
     ]);
   }
 };
+
 document.body.appendChild(app.render());
 ```
