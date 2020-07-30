@@ -4,50 +4,40 @@ hyperapp inspired Javascript framework composed of nothing but state and renderi
 # Example
 
 ```javascript
-var h = glue.h;
-var setState = glue.setState;
-
-var component1 = {
+const form = new Component({
   state: {
-    counter: 0
+    username: 'foo',
+    password: 'bar'
   },
-  render: function() {
-    var self = this;
-
-    return self.nodes = h('div', {}, [
-      h('span', {}, `Component #1 value: ${self.state.counter}`),
-      h('button', {onclick: setState.call(self, 'counter', self.state.counter + 1)}, '+'),
-      h('button', {onclick: setState.call(self, 'counter', self.state.counter - 1)}, '-')
-    ]);
+  draw: function () {
+    return h('div', {}, [
+      h('strong', {}, 'Username'),
+      h('br'),
+      h('input', { type: 'text', value: this.state.username, id: 'username' }),
+      h('br'),
+      h('strong', {}, 'Password'),
+      h('br'),
+      h('input', { type: 'password', value: this.state.password, id: 'password' }),
+      h('br'),
+      h('button', { onclick: (event) => console.log(event) }, 'Submit')
+    ])
   }
-};
+})
 
-var component2 = {
-  state: {
-    counter: 0
-  },
-  render: function() {
-    var self = this;
-
-    return self.nodes = h('div', {}, [
-      h('span', {}, `Component #2 value: ${self.state.counter}`),
-      h('button', {onclick: setState.call(self, 'counter', self.state.counter + 1)}, '+'),
-      h('button', {onclick: setState.call(self, 'counter', self.state.counter - 1)}, '-')
-    ]);
-  }
-};
-
-var app = {
+const app = new Component({
   state: {},
-  render: function() {
-    var self = this;
-    
-    return self.nodes = h('div', {}, [
-      component1.render(),
-      component2.render()
-    ]);
+  node: document.querySelector('#app'),
+  draw: function () {
+    return h('div', {}, [
+      form.draw()
+    ])
   }
-};
+})
 
-document.body.appendChild(app.render());
+app.render()
+
+setTimeout(() => {
+  form.state.username = 'lol'
+  app.render()
+}, 1000)
 ```

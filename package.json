@@ -1,0 +1,25 @@
+{
+  "name": "glue",
+  "version": "1.0.0",
+  "description": "hyperapp inspired Javascript framework composed of nothing but state and rendering",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandonros/glue.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brandonros/glue/issues"
+  },
+  "homepage": "https://github.com/brandonros/glue#readme",
+  "dependencies": {
+    "diff-dom": "^4.1.6"
+  },
+  "devDependencies": {
+    "rollup": "^2.23.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  }
+}
