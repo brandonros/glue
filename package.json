@@ -16,7 +16,7 @@
   },
   "homepage": "https://github.com/brandonros/glue#readme",
   "dependencies": {
-    "diff-dom": "^4.1.6"
+    "diff-dom": "^4.2.8"
   },
   "devDependencies": {
     "rollup": "^2.23.0",
